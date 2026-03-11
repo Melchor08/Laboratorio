@@ -3,215 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventario CBTis258 - Profesional</title>
+    <title>Inventario Pro - CBTis 258</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0f4c81;
-            --secondary: #1e88e5;
-            --bg-light: #f4f6f8;
-            --text-dark: #333;
-            --success: #28a745;
-            --warning: #ffc107;
-            --danger: #dc3545;
+            --accent: #3b82f6;
+            --bg-body: #eef2f7;
+            --card-white: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: radial-gradient(circle at top left, #1e88e5, #0f4c81);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            color: var(--text-main);
         }
 
-        /* Contenedor Principal (Estilo Smartphone) */
-        .phone {
-            width: 100%;
-            max-width: 410px;
-            height: 820px;
-            background: white;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        /* Contenedor Estilo iPhone Ultra */
+        .phone-container {
+            width: 380px;
+            height: 800px;
+            background: var(--bg-body);
+            border-radius: 45px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+            position: relative;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            border: 8px solid #222; /* Marco del teléfono */
+            border: 10px solid #1a1a1a;
         }
 
-        /* Cabecera Fija */
+        /* Notch superior simulado */
+        .phone-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 25px;
+            background: #1a1a1a;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: 100;
+        }
+
+        /* Header Profesional */
         header {
-            padding: 30px 20px 10px;
+            padding: 45px 25px 20px;
             background: white;
-            text-align: center;
-            z-index: 10;
         }
 
-        h1 {
+        header h1 {
+            font-size: 22px;
+            font-weight: 700;
             color: var(--primary);
-            font-size: 1.4rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
         }
 
-        /* Área de Contenido con Scroll */
-        .content {
+        header p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Contenido con scroll fluido */
+        .main-scroll {
             flex: 1;
-            padding: 0 20px;
+            padding: 20px;
             overflow-y: auto;
-            scrollbar-width: none; /* Ocultar scroll en Firefox */
+            scroll-behavior: smooth;
         }
 
-        .content::-webkit-scrollbar { display: none; } /* Ocultar scroll en Chrome/Safari */
+        .main-scroll::-webkit-scrollbar { display: none; }
 
-        section {
-            margin-bottom: 25px;
-        }
-
-        h3 {
-            color: var(--text-dark);
-            font-size: 0.9rem;
+        .section-title {
+            font-size: 12px;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 12px;
+            color: var(--text-muted);
+            margin: 20px 0 12px 5px;
+        }
+
+        /* Tarjetas Estilo Dashboard Moderno */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat-card {
+            background: var(--card-white);
+            padding: 20px;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+
+        .stat-card h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        /* Puntos de color para estatus */
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        /* Secciones de Laboratorio */
+        .lab-row {
+            background: white;
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-
-        /* Grid de Tarjetas Mejorado */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .card {
-            background: var(--bg-light);
             padding: 15px;
-            border-radius: 18px;
-            transition: transform 0.2s;
-            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
 
-        .card:active {
-            transform: scale(0.95);
+        .lab-icon {
+            width: 45px;
+            height: 45px;
+            background: #f0f7ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--accent);
+            margin-right: 15px;
         }
 
-        .card h2 {
-            font-size: 1.6rem;
-            color: var(--secondary);
-            margin-bottom: 4px;
+        /* Barra de navegación "Floating" */
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px 30px;
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
 
-        .card p {
-            font-size: 0.75rem;
-            color: #666;
-            font-weight: 600;
-        }
-
-        /* Colores de estado */
-        .border-success { border-left: 4px solid var(--success); }
-        .border-warning { border-left: 4px solid var(--warning); }
-        .border-danger { border-left: 4px solid var(--danger); }
-
-        /* Navegación Inferior Estilo App */
-        .bottom-nav {
-            background: #ffffff;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            padding: 10px 5px 25px; /* Padding extra abajo para el diseño de móvil */
-            border-top: 1px solid #eee;
-        }
-
-        .nav-item {
+        .nav-btn {
+            text-decoration: none;
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-decoration: none;
-            color: #888;
-            font-size: 0.65rem;
+            gap: 5px;
+            color: var(--text-muted);
+            font-size: 10px;
             font-weight: 600;
-            gap: 4px;
+            transition: 0.3s;
         }
 
-        .nav-item.active {
-            color: var(--secondary);
+        .nav-btn.active { color: var(--accent); }
+
+        .nav-btn i {
+            font-size: 20px;
+            margin-bottom: 2px;
         }
 
-        .nav-icon {
-            font-size: 1.2rem;
-        }
+        .logout-btn { color: var(--danger); }
 
-        .logout {
-            color: var(--danger);
-        }
     </style>
 </head>
 <body>
 
-    <div class="phone">
+    <div class="phone-container">
         <header>
+            <p>Panel Administrativo</p>
             <h1>CBTis 258</h1>
-            <p style="font-size: 0.8rem; color: #888;">Sistema de Inventario</p>
         </header>
 
-        <div class="content">
+        <main class="main-scroll">
             
-            <section>
-                <h3>📊 Equipos</h3>
-                <div class="cards-grid">
-                    <div class="card"><h2>15</h2><p>Totales</p></div>
-                    <div class="card border-success"><h2>9</h2><p>Operativos</p></div>
-                    <div class="card border-warning"><h2>3</h2><p>Mantenimiento</p></div>
-                    <div class="card border-danger"><h2>3</h2><p>Dañados</p></div>
+            <div class="section-title">Resumen de Inventario</div>
+            <div class="stats-grid">
+                <div class="stat-card" style="grid-column: span 2; background: var(--primary); color: white;">
+                    <p style="color: rgba(255,255,255,0.7)">Total Equipos registrados</p>
+                    <h2 style="font-size: 32px;">15</h2>
+                    <div style="font-size: 11px; margin-top: 10px;">↑ 2 este mes</div>
                 </div>
-            </section>
-
-            <section>
-                <h3>⚠️ Reportes y Fallas</h3>
-                <div class="cards-grid">
-                    <div class="card"><h2>6</h2><p>Reportes</p></div>
-                    <div class="card border-danger"><h2>2</h2><p>Pendientes</p></div>
-                    <div class="card border-warning"><h2>2</h2><p>En Proceso</p></div>
-                    <div class="card border-success"><h2>2</h2><p>Resueltos</p></div>
+                
+                <div class="stat-card">
+                    <h2 style="color: var(--success);">09</h2>
+                    <p><span class="status-dot" style="background: var(--success);"></span>Operativos</p>
                 </div>
-            </section>
-
-            <section>
-                <h3>🧪 Laboratorios</h3>
-                <div class="cards-grid" style="grid-template-columns: repeat(3, 1fr);">
-                    <div class="card" style="padding: 10px;"><h2>L1</h2><p>Soporte</p></div>
-                    <div class="card" style="padding: 10px;"><h2>L2</h2><p>Program.</p></div>
-                    <div class="card" style="padding: 10px;"><h2>L3</h2><p>Usos M.</p></div>
+                
+                <div class="stat-card">
+                    <h2 style="color: var(--danger);">03</h2>
+                    <p><span class="status-dot" style="background: var(--danger);"></span>Dañados</p>
                 </div>
-            </section>
+            </div>
 
-        </div>
+            <div class="section-title">Reportes Activos</div>
+            <div class="stat-card" style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h2>06</h2>
+                    <p>Fallas reportadas</p>
+                </div>
+                <div style="text-align: right;">
+                    <div style="color: var(--warning); font-weight: 700; font-size: 14px;">2 Pendientes</div>
+                    <div style="font-size: 11px; color: var(--text-muted);">Revisar ahora →</div>
+                </div>
+            </div>
 
-        <nav class="bottom-nav">
-            <a href="inicio.html" class="nav-item active">
-                <span class="nav-icon">🏠</span>
-                Inicio
-            </a>
-            <a href="gestion_de_equipos.html" class="nav-item">
-                <span class="nav-icon">💻</span>
-                Equipos
-            </a>
-            <a href="reporte.html" class="nav-item">
-                <span class="nav-icon">📄</span>
-                Reportes
-            </a>
-            <a href="inicio_secion.html" class="nav-item logout">
-                <span class="nav-icon">🚪</span>
-                Salir
-            </a>
+            <div class="section-title">Ubicaciones</div>
+            <div class="lab-row">
+                <div class="lab-icon">L1</div>
+                <div>
+                    <div style="font-weight: 700; font-size: 14px;">Laboratorio de Cómputo</div>
+                    <div style="font-size: 12px; color: var(--text-muted);">Especialidad Soporte</div>
+                </div>
+            </div>
+            <div class="lab-row">
+                <div class="lab-icon">L2</div>
+                <div>
+                    <div style="font-weight: 700; font-size: 14px;">Laboratorio de Programación</div>
+                    <div style="font-size: 12px; color: var(--text-muted);">Especialidad Programación</div>
+                </div>
+            </div>
+
+        </main>
+
+        <nav class="nav-bar">
+            <a href="inicio.html" class="nav-btn active"><span>🏠</span>Inicio</a>
+            <a href="gestion_de_equipos.html" class="nav-btn"><span>💻</span>Equipos</a>
+            <a href="reporte.html" class="nav-btn"><span>📊</span>Reportes</a>
+            <a href="inicio_secion.html" class="nav-btn logout-btn"><span>🚪</span>Salir</a>
         </nav>
     </div>
 
