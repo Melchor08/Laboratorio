@@ -3,256 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Equipos - CBTis258</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Gestión de Equipos - CBTis 258</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Reutilizamos la base del diseño anterior para mantener coherencia */
         :root {
-            --primary-bg: #f8f9fa;
-            --sidebar-bg: #ffffff;
-            --card-bg: #ffffff;
-            --text-main: #333333;
-            --text-muted: #666666;
-            --accent-blue: #34678d;
-            --danger-red: #dc3545;
+            --primary: #0f4c81;
+            --accent: #3b82f6;
+            --bg-body: #eef2f7;
+            --card-white: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
             --border-color: #e9ecef;
-            --table-header: #f1f4f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--primary-bg);
-            margin: 0;
+            background: radial-gradient(circle at top left, #1e88e5, #0f4c81);
             display: flex;
-            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-main);
         }
 
-        /* --- Sidebar (Igual al anterior para consistencia) --- */
-        .sidebar {
-            width: 260px;
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid #ddd;
-            padding: 30px;
+        /* Contenedor Smartphone Premium */
+        .phone-container {
+            width: 380px;
+            height: 800px;
+            background: var(--bg-body);
+            border-radius: 45px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+            position: relative;
             display: flex;
             flex-direction: column;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.02);
+            overflow: hidden;
+            border: 10px solid #1a1a1a;
         }
 
-        .sidebar h2 {
-            font-size: 1.1rem;
-            color: var(--accent-blue);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 40px;
-            text-align: center;
+        .phone-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 25px;
+            background: #1a1a1a;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: 100;
         }
 
-        .nav-link {
-            display: block;
-            padding: 12px 15px;
-            text-decoration: none;
-            color: var(--text-main);
-            border-radius: 8px;
-            margin-bottom: 5px;
-            font-weight: 500;
-            transition: 0.3s;
+        header {
+            padding: 45px 25px 20px;
+            background: white;
         }
 
-        .nav-link:hover { background: #f0f4f8; }
-        .nav-link.active { background: var(--accent-blue); color: white; }
-
-        .btn-logout {
-            margin-top: auto;
-            padding: 12px;
-            background: var(--danger-red);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
+        header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
         }
 
-        /* --- Contenido de la Tabla --- */
-        .main-content {
-            flex-grow: 1;
-            padding: 40px;
+        /* Contenido con Scroll */
+        .main-scroll {
+            flex: 1;
+            padding: 15px;
             overflow-y: auto;
         }
-
-        .table-container {
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            padding: 25px;
-        }
-
-        h1 {
-            font-size: 1.6rem;
-            margin-bottom: 25px;
-            color: var(--text-main);
-        }
+        .main-scroll::-webkit-scrollbar { display: none; }
 
         /* Filtros */
         .filter-section {
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            margin-bottom: 20px;
+            padding: 10px;
         }
 
         label {
-            font-weight: 600;
+            font-size: 12px;
+            font-weight: 700;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 8px;
         }
 
         select {
-            padding: 8px 15px;
-            border: 1px solid #ced4da;
-            border-radius: 6px;
-            background-color: white;
-            font-size: 0.9rem;
+            width: 100%;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: white;
+            font-size: 14px;
             outline: none;
         }
 
-        /* Estilos de la Tabla Profesional */
+        /* Contenedor de tabla para Scroll Horizontal en móvil */
+        .table-wrapper {
+            background: white;
+            border-radius: 20px;
+            overflow-x: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.9rem;
+            min-width: 600px; /* Asegura que la tabla no se aplaste */
         }
 
         thead th {
-            background-color: var(--table-header);
-            color: var(--accent-blue);
+            background-color: #f8fafc;
+            color: var(--primary);
             text-align: left;
-            padding: 15px;
-            font-weight: 700;
+            padding: 12px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             border-bottom: 2px solid var(--border-color);
         }
 
         tbody td {
-            padding: 15px;
+            padding: 12px;
+            font-size: 13px;
             border-bottom: 1px solid var(--border-color);
             color: var(--text-main);
         }
 
-        /* Efecto cebra y hover */
-        tbody tr:nth-child(even) {
-            background-color: #fafbfc;
-        }
-
-        tbody tr:hover {
-            background-color: #f1f7ff;
-            transition: 0.2s;
-        }
-
-        /* Badge para ubicación o etiquetas */
         .badge {
             display: inline-block;
             padding: 4px 8px;
-            border-radius: 4px;
-            background: #e9ecef;
-            font-size: 0.8rem;
+            border-radius: 6px;
+            background: #f1f5f9;
+            font-size: 11px;
+            font-weight: 600;
             color: var(--text-muted);
+            white-space: nowrap;
         }
+
+        /* Barra de navegación inferior */
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px 30px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-muted);
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .nav-btn.active { color: var(--accent); }
+
     </style>
 </head>
 <body>
 
-    <nav class="sidebar">
-        <h2>sistema de inventario</h2>
-    <li class="nav-item"><a href="inicio.html" class="nav-link">Inicio</a></li>
-
-<li class="nav-item"><a href="gestion_de_equipos.html" class="nav-link">Gestión de equipos</a></li>
-
-<li class="nav-item"><a href="fallas.html" class="nav-link">Registro de Fallas</a></li>
-
-<li class="nav-item"><a href="requisiciones.html" class="nav-link">Requisiciones</a></li>
-
-<li class="nav-item"><a href="salida.html" class="nav-link">Vales de Salida</a></li>
-
-<li class="nav-item"><a href="reporte.html" class="nav-link">Reportes</a></li>
-
-<li class="nav-item"><a href="registro.html" class="nav-link">Registro de usuario</a></li>
-        <button class="btn-logout">Cerrar Sesión</button>
-    </nav>
-
-    <main class="main-content">
-        <div class="table-container">
+    <div class="phone-container">
+        <header>
             <h1>Gestión de Equipos</h1>
+        </header>
 
+        <main class="main-scroll">
+            
             <div class="filter-section">
-                <label for="estado">Filtrar por estado:</label>
+                <label for="estado">Filtrar por estado</label>
                 <select id="estado">
-                    <option>Todos</option>
+                    <option>Todos los equipos</option>
                     <option>Operativos</option>
                     <option>Dañados</option>
                 </select>
             </div>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Tipo</th>
-                        <th>Nombre</th>
-                        <th>No. de serie</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
-                        <th>Ubicación</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>PC</td>
-                        <td><strong>PC-LAB1-01</strong></td>
-                        <td>SN-2023-001</td>
-                        <td>HP</td>
-                        <td>EliteDesk 800 G6</td>
-                        <td><span class="badge">LAB-1 Mesa 01</span></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>PC</td>
-                        <td><strong>PC-LAB1-02</strong></td>
-                        <td>SN-2023-002</td>
-                        <td>HP</td>
-                        <td>EliteDesk 800 G6</td>
-                        <td><span class="badge">LAB-1 Mesa 02</span></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>PC</td>
-                        <td><strong>PC-LAB1-03</strong></td>
-                        <td>SN-2023-003</td>
-                        <td>HP</td>
-                        <td>EliteDesk 800 G6</td>
-                        <td><span class="badge">LAB-1 Mesa 03</span></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>PC</td>
-                        <td><strong>PC-LAB1-04</strong></td>
-                        <td>SN-2023-004</td>
-                        <td>HP</td>
-                        <td>EliteDesk 800 G6</td>
-                        <td><span class="badge">LAB-1 Mesa 04</span></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>PC</td>
-                        <td><strong>PC-LAB2-01</strong></td>
-                        <td>SN-2023-005</td>
-                        <td>Dell</td>
-                        <td>OptiPlex 7080</td>
-                        <td><span class="badge">LAB-2 Mesa 01</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Serie</th>
+                            <th>Marca</th>
+                            <th>Ubicación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>PC-LAB1-01</strong></td>
+                            <td>SN-2023-01</td>
+                            <td>HP</td>
+                            <td><span class="badge">LAB-1 Mesa 01</span></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>PC-LAB1-02</strong></td>
+                            <td>SN-2023-02</td>
+                            <td>HP</td>
+                            <td><span class="badge">LAB-1 Mesa 02</span></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>PC-LAB1-03</strong></td>
+                            <td>SN-2023-03</td>
+                            <td>HP</td>
+                            <td><span class="badge">LAB-1 Mesa 03</span></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><strong>PC-LAB1-04</strong></td>
+                            <td>SN-2023-04</td>
+                            <td>HP</td>
+                            <td><span class="badge">LAB-1 Mesa 04</span></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><strong>PC-LAB2-01</strong></td>
+                            <td>SN-2023-05</td>
+                            <td>Dell</td>
+                            <td><span class="badge">LAB-2 Mesa 01</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+
+        <nav class="nav-bar">
+            <a href="inicio.html" class="nav-btn"><span>🏠</span>Inicio</a>
+            <a href="gestion_de_equipos.html" class="nav-btn active"><span>💻</span>Equipos</a>
+            <a href="fallas.html" class="nav-btn"><span>🛠️</span>Fallas</a>
+            <a href="inicio_secion.html" class="nav-btn" style="color: var(--danger);"><span>🚪</span>Salir</a>
+        </nav>
+    </div>
 
 </body>
 </html>
