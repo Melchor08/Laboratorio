@@ -34,7 +34,6 @@
             color: var(--text-main);
         }
 
-        /* Contenedor Estilo iPhone Ultra */
         .phone-container {
             width: 380px;
             height: 800px;
@@ -48,7 +47,6 @@
             border: 10px solid #1a1a1a;
         }
 
-        /* Notch superior simulado */
         .phone-container::before {
             content: '';
             position: absolute;
@@ -63,10 +61,12 @@
             z-index: 100;
         }
 
-        /* Header Profesional */
         header {
             padding: 45px 25px 20px;
             background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
         }
 
         header h1 {
@@ -75,17 +75,10 @@
             color: var(--primary);
         }
 
-        header p {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        /* Contenido con scroll fluido */
         .main-scroll {
             flex: 1;
             padding: 20px;
             overflow-y: auto;
-            scroll-behavior: smooth;
         }
 
         .main-scroll::-webkit-scrollbar { display: none; }
@@ -99,7 +92,6 @@
             margin: 20px 0 12px 5px;
         }
 
-        /* Tarjetas Estilo Dashboard Moderno */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -111,14 +103,15 @@
             padding: 20px;
             border-radius: 24px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: all 0.2s ease;
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        .stat-card:active {
+            transform: scale(0.96);
+            background: #f8fafc;
         }
 
         .stat-card h2 {
@@ -133,7 +126,6 @@
             color: var(--text-muted);
         }
 
-        /* Puntos de color para estatus */
         .status-dot {
             width: 8px;
             height: 8px;
@@ -142,31 +134,24 @@
             margin-right: 5px;
         }
 
-        /* Secciones de Laboratorio */
-        .lab-row {
+        /* Estilo para el enlace de fallas resaltado */
+        .action-card {
             background: white;
             display: flex;
             align-items: center;
-            padding: 15px;
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 24px;
             margin-bottom: 10px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            text-decoration: none;
+            color: var(--text-main);
+            border: 1px solid rgba(239, 68, 68, 0.1);
         }
 
-        .lab-icon {
-            width: 45px;
-            height: 45px;
-            background: #f0f7ff;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: var(--accent);
+        .action-icon {
+            font-size: 24px;
             margin-right: 15px;
         }
 
-        /* Barra de navegación "Floating" */
         .nav-bar {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(15px);
@@ -185,16 +170,9 @@
             color: var(--text-muted);
             font-size: 10px;
             font-weight: 600;
-            transition: 0.3s;
         }
 
         .nav-btn.active { color: var(--accent); }
-
-        .nav-btn i {
-            font-size: 20px;
-            margin-bottom: 2px;
-        }
-
         .logout-btn { color: var(--danger); }
 
     </style>
@@ -203,66 +181,55 @@
 
     <div class="phone-container">
         <header>
-            <p>Panel Administrativo</p>
-            <h1>CBTis 258</h1>
+            <div>
+                <p style="font-size: 13px; color: var(--text-muted);">Panel Administrativo</p>
+                <h1>CBTis 258</h1>
+            </div>
+            <a href="index.html" style="text-decoration: none; font-size: 20px;"></a>
         </header>
 
         <main class="main-scroll">
             
-            <div class="section-title">Resumen de Inventario</div>
+            <div class="section-title">Resumen</div>
             <div class="stats-grid">
                 <div class="stat-card" style="grid-column: span 2; background: var(--primary); color: white;">
-                    <p style="color: rgba(255,255,255,0.7)">Total Equipos registrados</p>
+                    <p style="color: rgba(255,255,255,0.7)">Total Equipos</p>
                     <h2 style="font-size: 32px;">15</h2>
-                    <div style="font-size: 11px; margin-top: 10px;">↑ 2 este mes</div>
                 </div>
-                
                 <div class="stat-card">
                     <h2 style="color: var(--success);">09</h2>
                     <p><span class="status-dot" style="background: var(--success);"></span>Operativos</p>
                 </div>
-                
                 <div class="stat-card">
                     <h2 style="color: var(--danger);">03</h2>
                     <p><span class="status-dot" style="background: var(--danger);"></span>Dañados</p>
                 </div>
             </div>
 
-            <div class="section-title">Reportes Activos</div>
-            <div class="stat-card" style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                    <h2>06</h2>
-                    <p>Fallas reportadas</p>
+            <div class="section-title">Atención Requerida</div>
+            
+            <a href="fallas.html" class="action-card">
+                <div class="action-icon"></div>
+                <div style="flex: 1;">
+                    <div style="font-weight: 700; font-size: 15px;">Registro de Fallas</div>
+                    <div style="font-size: 12px; color: var(--text-muted);">6 reportes activos actualmente</div>
                 </div>
-                <div style="text-align: right;">
-                    <div style="color: var(--warning); font-weight: 700; font-size: 14px;">2 Pendientes</div>
-                    <div style="font-size: 11px; color: var(--text-muted);">Revisar ahora →</div>
-                </div>
-            </div>
+                <div style="color: var(--danger); font-weight: bold;">→</div>
+            </a>
 
             <div class="section-title">Ubicaciones</div>
-            <div class="lab-row">
-                <div class="lab-icon">L1</div>
-                <div>
-                    <div style="font-weight: 700; font-size: 14px;">Laboratorio de Cómputo</div>
-                    <div style="font-size: 12px; color: var(--text-muted);">Especialidad Soporte</div>
-                </div>
-            </div>
-            <div class="lab-row">
-                <div class="lab-icon">L2</div>
-                <div>
-                    <div style="font-weight: 700; font-size: 14px;">Laboratorio de Programación</div>
-                    <div style="font-size: 12px; color: var(--text-muted);">Especialidad Programación</div>
-                </div>
+            <div class="action-card" style="padding: 15px; border: none;">
+                <div class="action-icon" style="font-size: 18px;"></div>
+                <div style="font-weight: 600; font-size: 14px;">Laboratorios (3)</div>
             </div>
 
         </main>
 
         <nav class="nav-bar">
-            <a href="inicio.html" class="nav-btn active"><span></span>Inicio</a>
+            <a href="index.html" class="nav-btn active"><span></span>Inicio</a>
             <a href="gestion_de_equipos.html" class="nav-btn"><span></span>Equipos</a>
-            <a href="reporte.html" class="nav-btn"><span></span>Reportes</a>
-            <a href="inicio_secion.html" class="nav-btn logout-btn"><span></span>Salir</a>
+            <a href="fallas.html" class="nav-btn"><span></span>Fallas</a>
+            <a href="index.html" class="nav-btn logout-btn"><span></span>Salir</a>
         </nav>
     </div>
 
