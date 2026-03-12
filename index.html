@@ -8,118 +8,158 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+    :root {
+        --primary: #0f4c81;
+        --accent: #3b82f6;
+        --bg-body: #eef2f7;
+        --text-main: #1e293b;
+        --text-muted: #64748b;
+        --border-color: #e2e8f0;
+    }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Poppins',sans-serif;
+    }
 
-body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#0f4c81,#1e88e5);
-}
+    body{
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        /* Degradado Premium igual a las otras pantallas */
+        background: radial-gradient(circle at top left, #1e88e5, #0f4c81);
+    }
 
-/* CONTENEDOR ESTILO APP MOVIL */
+    /* CONTENEDOR ESTILO SMARTPHONE PREMIUM */
+    .phone-container{
+        width: 380px;
+        height: 800px;
+        background: white;
+        border-radius: 45px;
+        box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 40px;
+        border: 10px solid #1a1a1a;
+        overflow: hidden;
+    }
 
-.phone-container{
-width:360px;
-height:640px;
-background:white;
-border-radius:30px;
-box-shadow:0 20px 40px rgba(0,0,0,0.2);
-display:flex;
-flex-direction:column;
-justify-content:center;
-padding:35px;
-}
+    /* Notch superior del celular */
+    .phone-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        height: 25px;
+        background: #1a1a1a;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        z-index: 100;
+    }
 
-/* TITULOS */
+    /* LOGOTIPO */
+    .logo-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-h1{
-text-align:center;
-color:#0f4c81;
-font-size:24px;
-margin-bottom:5px;
-}
+    .logo-container img {
+        width: 120px; /* Tamaño ajustado para el logo */
+        height: auto;
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    }
 
-h2{
-text-align:center;
-color:#1e88e5;
-font-size:14px;
-margin-bottom:30px;
-font-weight:400;
-}
+    /* TITULOS */
+    h1{
+        text-align:center;
+        color: var(--primary);
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
 
-/* INPUTS */
+    h2{
+        text-align:center;
+        color: var(--text-muted);
+        font-size: 14px;
+        margin-bottom: 35px;
+        font-weight: 400;
+    }
 
-.form-group{
-margin-bottom:20px;
-}
+    /* INPUTS ESTILO PREMIUM */
+    .form-group{
+        margin-bottom: 20px;
+    }
 
-label{
-font-size:14px;
-color:#333;
-margin-bottom:6px;
-display:block;
-}
+    label{
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-main);
+        margin-bottom: 8px;
+        display: block;
+        margin-left: 5px;
+    }
 
-input{
-width:100%;
-padding:12px;
-border-radius:10px;
-border:1px solid #dcdcdc;
-font-size:14px;
-transition:0.3s;
-}
+    input{
+        width: 100%;
+        padding: 14px;
+        border-radius: 15px;
+        border: 1px solid var(--border-color);
+        background: #f8fafc;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
 
-input:focus{
-border-color:#1e88e5;
-outline:none;
-box-shadow:0 0 5px rgba(30,136,229,0.3);
-}
+    input:focus{
+        border-color: var(--accent);
+        outline: none;
+        background: white;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    }
 
-/* BOTON */
+    /* BOTON */
+    .btn-login{
+        width:100%;
+        padding: 16px;
+        border: none;
+        border-radius: 15px;
+        background: var(--primary);
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 10px;
+    }
 
-.btn-login{
-width:100%;
-padding:14px;
-border:none;
-border-radius:12px;
-background:linear-gradient(135deg,#1e88e5,#0f4c81);
-color:white;
-font-size:16px;
-font-weight:600;
-cursor:pointer;
-transition:0.3s;
-}
+    .btn-login:active {
+        transform: scale(0.97);
+    }
 
-.btn-login:hover{
-transform:scale(1.03);
-box-shadow:0 8px 20px rgba(0,0,0,0.2);
-}
+    /* REGISTRO */
+    .register{
+        text-align:center;
+        margin-top: 25px;
+        font-size: 13px;
+        color: var(--text-muted);
+    }
 
-/* REGISTRO */
+    .register a{
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+    }
 
-.register{
-text-align:center;
-margin-top:18px;
-font-size:13px;
-}
-
-.register a{
-color:#1e88e5;
-text-decoration:none;
-font-weight:600;
-}
-
-.register a:hover{
-text-decoration:underline;
-}
+    .register a:hover{
+        text-decoration: underline;
+    }
 
 </style>
 </head>
@@ -128,34 +168,37 @@ text-decoration:underline;
 
 <div class="phone-container">
 
-<h1>Sistema de Inventario</h1>
-<h2>Laboratorio CBTis 258</h2>
+    <div class="logo-container">
+        <img src="images-removebg-preview.png" alt="Logo CBTis 258">
+    </div>
 
-<form>
+    <h1>Sistema de Inventario</h1>
+    <h2>Laboratorio CBTis 258</h2>
 
-<div class="form-group">
-<label>Usuario</label>
-<input type="text" placeholder="Ingrese su usuario">
-</div>
+    <form>
+        <div class="form-group">
+            <label>Usuario</label>
+            <input type="text" placeholder="Ingrese su usuario">
+        </div>
 
-<div class="form-group">
-<label>Contraseña</label>
-<input type="password" placeholder="Ingrese su contraseña">
-</div>
+        <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" placeholder="Ingrese su contraseña">
+        </div>
 
-<a href="inicio.html">
-<button type="button" class="btn-login">Iniciar Sesión</button>
-</a>
+        <a href="inicio.html" style="text-decoration: none;">
+            <button type="button" class="btn-login">Iniciar Sesión</button>
+        </a>
 
-<div class="register">
-¿No tienes cuenta?
-<a href="registro.html">Registrarse</a>
-</div>
-
-</form>
+        <div class="register">
+            ¿No tienes cuenta?
+            <a href="registro.html">Registrarse</a>
+        </div>
+    </form>
 
 </div>
 
 </body>
 </html>
+
 
