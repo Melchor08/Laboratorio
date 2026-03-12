@@ -3,189 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Usuario - CBTis258</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Registro de Usuario - CBTis 258</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-bg: #f8f9fa;
-            --sidebar-bg: #ffffff;
-            --card-bg: #ffffff;
-            --text-main: #333333;
-            --text-muted: #6c757d;
-            --accent-blue: #34678d;
-            --success-green: #2d5a4c;
-            --danger-red: #dc3545;
-            --border-color: #e0e0e0;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --primary: #0f4c81;
+            --accent: #3b82f6;
+            --bg-body: #eef2f7;
+            --card-white: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--primary-bg);
-            margin: 0;
+            background: radial-gradient(circle at top left, #1e88e5, #0f4c81);
             display: flex;
-            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
-        /* --- Barra Lateral --- */
-        .sidebar {
-            width: 260px;
-            background-color: var(--sidebar-bg);
-            border-right: 1px solid var(--border-color);
-            padding: 30px;
+        /* Contenedor Smartphone Premium */
+        .phone-container {
+            width: 380px;
+            height: 800px;
+            background: var(--bg-body);
+            border-radius: 45px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+            position: relative;
             display: flex;
             flex-direction: column;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.02);
+            overflow: hidden;
+            border: 10px solid #1a1a1a;
         }
 
-        .sidebar h2 {
-            font-size: 1.1rem;
-            color: var(--accent-blue);
-            margin-bottom: 30px;
+        .phone-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 25px;
+            background: #1a1a1a;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: 100;
+        }
+
+        header {
+            padding: 45px 25px 20px;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 20px;
             font-weight: 700;
-            text-align: center;
-            text-transform: lowercase;
+            color: var(--primary);
         }
 
-        .nav-link {
-            display: block;
-            padding: 12px 15px;
+        .back-link {
             text-decoration: none;
-            color: var(--text-main);
-            border-radius: 8px;
-            font-weight: 500;
-            margin-bottom: 5px;
-            transition: 0.3s;
+            font-size: 18px;
+            color: var(--text-muted);
         }
 
-        .nav-link:hover { background-color: #f0f4f8; }
-        .nav-link.active { background-color: var(--accent-blue); color: white; }
-
-        .btn-logout {
-            margin-top: auto;
-            padding: 12px;
-            background-color: var(--danger-red);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* --- Contenido Principal --- */
-        .main-content {
-            flex-grow: 1;
-            padding: 40px;
+        /* Contenido Principal con Scroll */
+        .main-scroll {
+            flex: 1;
+            padding: 20px;
             overflow-y: auto;
         }
+        .main-scroll::-webkit-scrollbar { display: none; }
 
-        .form-container {
-            background: var(--card-bg);
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            max-width: 800px;
-            margin: 0 auto;
+        /* Tarjeta de Formulario */
+        .form-card {
+            background: white;
+            border-radius: 28px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
 
-        h1 { font-size: 1.5rem; color: var(--text-main); margin-bottom: 25px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        .field-group {
+            margin-bottom: 20px;
+        }
 
-        .field-group { display: flex; flex-direction: column; margin-bottom: 20px; }
-        
-        label { font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
-        
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            margin-left: 4px;
+        }
+
         input, select {
-            padding: 12px;
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 0.95rem;
-            background-color: #fcfcfc;
+            background: #f8fafc;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s;
         }
 
-        /* Botones */
+        input:focus, select:focus {
+            border-color: var(--accent);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Botones Profesionales */
         .button-group {
             display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            margin-top: 30px;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
         }
 
         .btn {
-            padding: 12px 25px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
             border: none;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
             transition: 0.2s;
         }
 
-        .btn-delete { background: #fff; border: 1px solid var(--border-color); color: var(--text-main); }
-        .btn-delete:hover { background: #f0f0f0; }
-        .btn-register { background: var(--success-green); color: white; }
-        .btn-register:hover { opacity: 0.9; }
+        .btn-register { background: var(--primary); color: white; }
+        .btn-delete { background: #f1f5f9; color: var(--danger); }
+        
+        .btn:active { transform: scale(0.97); }
+
+        /* Barra de navegación inferior */
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px 30px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-muted);
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .nav-btn.active { color: var(--accent); }
 
     </style>
 </head>
 <body>
 
-    <nav class="sidebar">
-        <h2>sistema de inventario</h2>
-        <div class="nav-menu">
-<li class="nav-item"><a href="inicio.html" class="nav-link">Inicio</a></li>
+    <div class="phone-container">
+        <header>
+            <h1>Nuevo Usuario</h1>
+            <a href="index.html" class="back-link">🏠</a>
+        </header>
 
-<li class="nav-item"><a href="gestion_de_equipos.html" class="nav-link">Gestión de equipos</a></li>
-
-<li class="nav-item"><a href="fallas.html" class="nav-link">Registro de Fallas</a></li>
-
-<li class="nav-item"><a href="requisiciones.html" class="nav-link">Requisiciones</a></li>
-
-<li class="nav-item"><a href="salida.html" class="nav-link">Vales de Salida</a></li>
-
-<li class="nav-item"><a href="reporte.html" class="nav-link">Reportes</a></li>
-
-<li class="nav-item"><a href="registro.html" class="nav-link">Registro de usuario</a></li>
-        </div>
-        <button class="btn-logout">Cerrar Sesión</button>
-    </nav>
-
-    <main class="main-content">
-        <div class="form-container">
-            <h1>Registro de Usuario</h1>
+        <main class="main-scroll">
             
-            <div class="field-group">
-                <label>Nombre Completo:</label>
-                <input type="text" placeholder="Nombre completo del usuario">
+            <div class="form-card">
+                <div class="field-group">
+                    <label>Nombre Completo:</label>
+                    <input type="text" placeholder="Ej. Juan Pérez">
+                </div>
+
+                <div class="field-group">
+                    <label>Usuario:</label>
+                    <input type="text" placeholder="Nombre de acceso">
+                </div>
+
+                <div class="field-group">
+                    <label>Contraseña:</label>
+                    <input type="password" placeholder="••••••••">
+                </div>
+
+                <div class="field-group">
+                    <label>Rol de Usuario:</label>
+                    <select>
+                        <option>Docente / Usuario</option>
+                        <option>Administrador</option>
+                        <option>Soporte Técnico</option>
+                        <option>Directivo</option>
+                        <option>Almacén</option>
+                        <option>Responsable</option>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-register">Registrar Usuario</button>
+                    <button class="btn btn-delete">Eliminar Datos</button>
+                </div>
             </div>
 
-            <div class="field-group">
-                <label>Usuario:</label>
-                <input type="text" placeholder="Nombre de usuario para iniciar sesión">
-            </div>
+        </main>
 
-            <div class="field-group">
-                <label>Contraseña:</label>
-                <input type="password" placeholder="Contraseña segura">
-            </div>
-
-            <div class="field-group">
-                <label>Rol:</label>
-                <select>
-                    <option>Docente / Usuario</option>
-                    <option>Administrador</option>
-                    <option>Soporte Técnico</option>
-                    <option>Directivo</option>
-                    <option>Almacén</option>
-                    <option>Responsable</option>
-                </select>
-            </div>
-
-            <div class="button-group">
-                <button class="btn btn-delete">Eliminar</button>
-                <button class="btn btn-register">Registrar</button>
-            </div>
-                
-        </div>
-    </main>
+        <nav class="nav-bar">
+            <a href="inicio.html" class="nav-btn"><span></span>Inicio</a>
+            <a href="gestion_de_equipos.html" class="nav-btn"><span></span>Equipos</a>
+            <a href="reporte.html" class="nav-btn"><span></span>Reportes</a>
+            <a href="index.html" class="nav-btn" style="color: var(--danger);"><span></span>Salir</a>
+        </nav>
+    </div>
 
 </body>
 </html>
